@@ -12,7 +12,7 @@ features.html           Features
 pricing.html            Pricing (cards + full comparison table)
 compatibility.html      Device compatibility
 faq.html                FAQ (accordion + FAQPage structured data)
-contact.html            Contact (form opens the visitor's email app)
+contact.html            Contact (WhatsApp)
 blog.html               Blog index (empty state, no posts yet)
 privacy-policy.html     Privacy policy
 terms.html              Terms of service
@@ -22,14 +22,14 @@ robots.txt
 sitemap.xml
 assets/
   css/style.css         Shared stylesheet (design tokens at the top)
-  js/config.js          Editable configuration: prices, currency, support email
-  js/main.js            Shared script: menu, accordion, pricing, contact form
+  js/config.js          Editable configuration: prices and currency
+  js/main.js            Shared script: menu, accordion and pricing
   img/favicon.svg       Favicon / logo mark
 ```
 
 ## Editing prices
 
-Edit **`assets/js/config.js`** only. Every price on the site is generated from the `plans` array. That covers the homepage cards, pricing cards, comparison table, the "Plans from…" line, the contact-form plan list and the pricing structured data.
+Edit **`assets/js/config.js`** only. Every price on the site is generated from the `plans` array. That covers the homepage and pricing cards, the "Plans from…" line and the pricing structured data.
 
 ```js
 { id: "2-devices", devices: 2, prices: { "1m": 36, "3m": 63, "6m": 81, "12m": 118 } }
@@ -37,17 +37,15 @@ Edit **`assets/js/config.js`** only. Every price on the site is generated from t
 
 Per-month equivalents and "save X compared with paying monthly" figures are calculated automatically from these numbers.
 
-Prices are rendered with JavaScript. Visitors without JavaScript see a message asking them to email support for the price list.
+Prices are rendered with JavaScript. Visitors without JavaScript are directed to contact support on WhatsApp for the price list.
 
 ## Editing shared header / footer
 
 The header and footer appear in each HTML file, so a change to navigation or the footer must be made in **every** `.html` file. Use find-and-replace across the folder. `404.html` uses root-relative links (`/pricing.html`) so it works at any URL depth. All other pages use relative links.
 
-## Contact form
+## Contact
 
-There is no server-side form handler. The form validates the input and then opens the visitor's email app with a pre-filled message to `support@zenoiptv.com`. The page states clearly that **nothing is sent until the visitor presses Send in their email app**. It never shows a "message sent" confirmation.
-
-To use a real form backend later, replace the `initContactForm` submit handler in `assets/js/main.js`. Only show a success message after the backend confirms receipt, and update the privacy policy.
+The contact page and support links direct visitors to WhatsApp at **+44 7577 310143**. Subscription links include the selected plan details in a pre-filled WhatsApp message.
 
 ## SEO
 
@@ -72,7 +70,7 @@ Content that needs the owner's confirmation:
 
 - [ ] **Legal pages** (privacy policy, terms, disclaimer) are general drafts. Have them reviewed by a qualified legal professional. Add the legal entity name, address, governing law and a refund/cancellation policy as required for your jurisdiction.
 - [ ] **Compatibility page**: confirm that the listed device types are ones you actually support.
-- [ ] **FAQ / features**: confirm the ordering flow (order via email → support replies with payment and setup steps) matches how you actually work.
+- [ ] **FAQ / features**: confirm the ordering flow (order via WhatsApp → support replies with payment and setup steps) matches how you actually work.
 - [ ] **Prices** are provisional. Confirm them in `config.js`.
 - [ ] Decide whether "devices" means simultaneous connections, and say so explicitly on the pricing page and FAQ if it does.
 - [ ] **Blog** has no posts. Consider adding `noindex` to `blog.html` until articles exist, or add articles and list them in `sitemap.xml`.
@@ -80,4 +78,4 @@ Content that needs the owner's confirmation:
 - [ ] Plan **301 redirects** from the existing WordPress URLs to the new URLs before switching hosting, to preserve search rankings.
 - [ ] Optionally add a 1200×630 social sharing image and `og:image` tags.
 
-Must remain unchanged during migration: the `support@zenoiptv.com` mailbox and all existing DNS records (especially MX/email records).
+Must remain unchanged during migration: all existing DNS records, including MX records, and external hosting or messaging services.
