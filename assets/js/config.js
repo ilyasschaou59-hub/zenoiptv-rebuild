@@ -10,7 +10,7 @@
  */
 window.ZENO_CONFIG = {
   siteName: "ZenoIPTV",
-  siteUrl: "https://zenoiptv.com",
+  siteUrl: "https://www.zenoiptv.com",
   currency: "EUR",
   locale: "en-IE",
 

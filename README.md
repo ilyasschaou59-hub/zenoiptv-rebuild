@@ -2,7 +2,7 @@
 
 Static website for **zenoiptv.com**. It is built with plain HTML5, CSS3 and vanilla JavaScript. There is no build step, framework or dependency.
 
-> Status: **not deployed**. No GitHub, Vercel, DNS or hosting changes have been made. The existing WordPress site has not been touched.
+> Deployment note: No deployment, GitHub, Vercel, DNS, or hosting changes have been made in this task. The public domain currently serves a site matching this static project. The repository does not establish whether an older WordPress site or historical URLs existed.
 
 ## Structure
 
@@ -13,7 +13,9 @@ pricing.html            Pricing (cards + full comparison table)
 compatibility.html      Device compatibility
 faq.html                FAQ (accordion + FAQPage structured data)
 contact.html            Contact (WhatsApp)
-blog.html               Blog index (empty state, no posts yet)
+blog.html               Blog index
+blog/                   Seven static, SEO-ready articles
+SEO-CONTENT-PLAN.md     Blog audit, keyword intent record and content plan
 privacy-policy.html     Privacy policy
 terms.html              Terms of service
 disclaimer.html         Disclaimer
@@ -50,9 +52,11 @@ The contact page and support links direct visitors to WhatsApp at **+44 7577 310
 ## SEO
 
 - Each page has a unique `<title>`, meta description, canonical URL and Open Graph tags.
-- Structured data: `Organization` + `WebSite` (home), `BreadcrumbList` (inner pages), `FAQPage` (FAQ) and `Service` with an `OfferCatalog` (pricing, generated from `config.js`).
+- Structured data: `Organization` + `WebSite` (home), `BreadcrumbList` (inner pages), `BlogPosting` (blog articles), `FAQPage` (FAQ) and `Service` with an `OfferCatalog` (pricing, generated from `config.js`).
 - `sitemap.xml` lists all indexable pages. `404.html` is `noindex` and excluded.
-- Canonical URLs use the `.html` form, e.g. `https://zenoiptv.com/pricing.html`. If you enable clean URLs on the host later (e.g. Vercel `cleanUrls`), update the canonicals, `og:url`, internal links and the sitemap to match.
+- Canonical URLs use the `.html` form and the public `https://www.zenoiptv.com` host. Page canonicals, Open Graph URLs, structured data, generated site URLs, `robots.txt` and `sitemap.xml` should all remain aligned to this preferred host.
+- Blog articles use `www` canonicals and relative links to the shared site assets. Keep article metadata, visible publication dates, structured data and sitemap entries aligned when updating an article.
+- The article plan deliberately holds named-brand/platform queries for verification rather than publishing unsupported entity profiles. The separate WordPress site's old blog URLs are not present in this repository; crawl and map them at migration time before changing its hosting.
 
 ## Local preview
 
@@ -73,9 +77,9 @@ Content that needs the owner's confirmation:
 - [ ] **FAQ / features**: confirm the ordering flow (order via WhatsApp → support replies with payment and setup steps) matches how you actually work.
 - [ ] **Prices** are provisional. Confirm them in `config.js`.
 - [ ] Decide whether "devices" means simultaneous connections, and say so explicitly on the pricing page and FAQ if it does.
-- [ ] **Blog** has no posts. Consider adding `noindex` to `blog.html` until articles exist, or add articles and list them in `sitemap.xml`.
+- [ ] **Blog claims and market fit**: confirm current business, regional availability and content-rights statements before publishing or deploying the US-focused guides. The current site shows EUR pricing and a UK WhatsApp number; the guides do not claim US-specific availability.
 - [ ] If you add analytics, cookies or a form backend, update the privacy policy (it currently says the site uses none).
-- [ ] Plan **301 redirects** from the existing WordPress URLs to the new URLs before switching hosting, to preserve search rankings.
+- [ ] Crawl/export the existing WordPress blog URLs and backlinks before migration. Add redirects only for genuinely equivalent replacements; otherwise return an appropriate 404/410. No redirect rules are configured in this static repository.
 - [ ] Optionally add a 1200×630 social sharing image and `og:image` tags.
 
 Must remain unchanged during migration: all existing DNS records, including MX records, and external hosting or messaging services.

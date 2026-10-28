@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zenoiptv.com/sitemap.xml
+Sitemap: https://www.zenoiptv.com/sitemap.xml
