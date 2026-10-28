@@ -86,6 +86,11 @@ body.menu-open {
   overflow: hidden;
 }
 
+body.menu-open .site-header {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 main {
   flex: 1 0 auto;
 }
